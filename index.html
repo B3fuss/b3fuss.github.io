@@ -1,7 +1,372 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bnaya Dreyfuss</title>
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --accent: #1a3a5c;
+      --bg: #fff;
+      --bg-alt: #f7f8fa;
+      --border: #ddd;
+      --max-width: 800px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .name {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover, nav ul a.active {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* ---- About section ---- */
+    .about {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .about img {
+      width: 200px;
+      height: auto;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .about-text h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .about-text .affiliation {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      margin-bottom: 0.75rem;
+    }
+
+    .about-text .fields {
+      margin-top: 0.75rem;
+    }
+
+    .about-text .fields strong {
+      font-size: 0.95rem;
+    }
+
+    .contact-info {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-info a {
+      color: var(--accent);
+    }
+
+    /* ---- Section headings ---- */
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2.section-title {
+      font-size: 1.35rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Papers ---- */
+    .paper {
+      margin-bottom: 2rem;
+    }
+
+    .paper h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .paper h3 a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .paper h3 a:hover {
+      text-decoration: underline;
+    }
+
+    .paper .coauthors {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.15rem;
+      font-style: italic;
+    }
+
+    .paper .status {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .paper .abstract-toggle {
+      font-size: 0.88rem;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+      text-decoration: underline;
+      margin-bottom: 0.4rem;
+      display: inline-block;
+    }
+
+    .paper .abstract {
+      display: none;
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid var(--border);
+      line-height: 1.6;
+    }
+
+    .paper .abstract.show {
+      display: block;
+    }
+
+    /* ---- CV section ---- */
+    .cv-section p {
+      margin-bottom: 1rem;
+    }
+
+    .cv-section a {
+      color: var(--accent);
+    }
+
+    .cv-embed {
+      width: 100%;
+      height: 800px;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      max-width: var(--max-width);
+      margin: 3rem auto 0;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 640px) {
+      .about {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .about img {
+        width: 160px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      nav ul {
+        gap: 1.25rem;
+      }
+    }
+  </style>
+</head>
 <body>
-  <h1>Your Name</h1>
-  <p>Coming soon.</p>
+
+<header>
+  <nav>
+    <a class="name" href="#" onclick="showSection('about')">Bnaya Dreyfuss</a>
+    <ul>
+      <li><a href="#" onclick="showSection('about')" class="active" id="nav-about">About</a></li>
+      <li><a href="#" onclick="showSection('research')" id="nav-research">Research</a></li>
+      <li><a href="#" onclick="showSection('cv')" id="nav-cv">CV</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="active">
+    <div class="about">
+      <img src="headshot.jpg" alt="Bnaya Dreyfuss">
+      <div class="about-text">
+        <h1>Bnaya Dreyfuss</h1>
+        <div class="affiliation">
+          Ph.D. Candidate in Economics, Harvard University<br>
+          Assistant Professor, University of Pittsburgh (starting Fall 2026)
+        </div>
+        <p>
+          I am an economist studying how behavioral biases shape policy design and technology adoption.
+          My research combines theory and experiments to understand decision-making in public economics and behavioral economics.
+        </p>
+        <div class="fields">
+          <strong>Research Fields:</strong> Behavioral Economics, Public Economics
+        </div>
+        <div class="contact-info">
+          <a href="mailto:bdreyfuss@g.harvard.edu">bdreyfuss@g.harvard.edu</a><br>
+          Littauer Center, 1805 Cambridge Street, Cambridge, MA 02138
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section id="research">
+    <h2 class="section-title">Working Papers</h2>
+
+    <div class="paper">
+      <h3><a href="https://drive.google.com/file/d/1gnbBdE0kBulNgtzg9BPQtoC5Zq5Vc-N7/view" target="_blank">Equilibrium Neglect and Political Feasibility</a></h3>
+      <div class="status">Job Market Paper</div>
+      <button class="abstract-toggle" onclick="toggleAbstract(this)">[Abstract]</button>
+      <div class="abstract">
+        When voters underappreciate the equilibrium effects of policies, efficient reforms can become politically infeasible. I develop a general framework of equilibrium neglect, and use this framework to construct a portable and generally applicable remedy. Using off-path contingent rebates, a social planner can generate a policy that (i) implements the social optimum, (ii) is budget balanced and (iii) is politically feasible even in the presence of equilibrium-neglecting voters. In a survey experiment on congestion pricing with a probability sample from six US metros, I show that respondents are overly pessimistic about traffic-reduction effects of congestion pricing, and that pessimism correlates with strong opposition to the policy. Adding contingent compensation that pays if traffic remains high significantly increases public support, especially among potential compensation recipients. In surveys of civil servants and state legislators, I show how equilibrium neglect affects the policymaking process.
+      </div>
+    </div>
+
+    <div class="paper">
+      <h3><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5286198" target="_blank">Calibrated Coarsening: Designing Information for AI-Assisted Decisions</a></h3>
+      <div class="coauthors">with Ruru Hoong</div>
+      <button class="abstract-toggle" onclick="toggleAbstract(this)">[Abstract]</button>
+      <div class="abstract">
+        Artificial intelligence (AI) is increasingly used to aid human decision-making across critical applications, but errors in human probabilistic reasoning often undermine its effectiveness. This raises the central design question of how to provide AI input to humans in a way that improves decision-making outcomes. We propose calibrated coarsening&mdash;partitioning the signal space into fewer cells at chosen thresholds&mdash;as a way to do so that (i) ensures humans retain final decision authority, (ii) modifies signals without deception, and (iii) adapts flexibly to diverse biases and contexts. In a randomized experiment with professional loan specialists, we demonstrate that coarsening AI signals at the theory-derived threshold significantly improves decision-making outcomes, over both the human-only and uncoarsened AI benchmarks.
+      </div>
+    </div>
+
+    <div class="paper">
+      <h3><a href="https://www.dropbox.com/scl/fi/pvo3ozkqfrmlwo3ndscdz/HLA_latest.pdf?rlkey=mmz8f71xm0a2t6nvixl7aih23&dl=0" target="_blank">Human Learning About AI</a></h3>
+      <div class="coauthors">with Rapha&euml;l Raux</div>
+      <div class="status">Extended abstract at EC '25</div>
+      <button class="abstract-toggle" onclick="toggleAbstract(this)">[Abstract]</button>
+      <div class="abstract">
+        We study how people form expectations about the performance of artificial intelligence (AI) and consequences for AI adoption. Our main hypothesis is that people rely on human-relevant task features when evaluating AI, treating AI failures on human-easy tasks, and successes on human-difficult tasks, as highly informative of its overall performance. In lab experiments, we show that projection of human difficulty onto AI predictably distorts subjects' beliefs and can lead to suboptimal adoption, as failing human-easy tasks need not imply poor overall performance for AI. We find evidence for projection in a field experiment with an AI giving parenting advice. Potential users strongly infer from answers that are equally uninformative but less humanly-similar to expected answers, significantly reducing trust and future engagement.
+      </div>
+    </div>
+
+    <div class="paper">
+      <h3><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3797290" target="_blank">On the Workings of Tribal Politics</a></h3>
+      <div class="coauthors">with Assaf Patir and Moses Shayo</div>
+      <button class="abstract-toggle" onclick="toggleAbstract(this)">[Abstract]</button>
+      <div class="abstract">
+        We study economies in which an endogenous subset of voters support certain ("tribal") candidates regardless of their policies, and politicians choose whether or not to run on a tribal ticket. Non-tribal politics is characterized by centrist policies, while tribal politics produces extreme policies, typically from the right, despite the fact that the tribal base is from the lower middle class. Allowing policy in one period to determine the income distribution in the next, the economy either converges to a steady state or cycles between tribal and non-tribal regimes, depending on the vote share of the minority group, the scope for redistributive policy, and the salience of inter-group disparities.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ CV ============ -->
+  <section id="cv">
+    <h2 class="section-title">Curriculum Vitae</h2>
+    <div class="cv-section">
+      <p><a href="CV_Dreyfuss (oct-18-2025).pdf" target="_blank">Download CV (PDF)</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Bnaya Dreyfuss &middot; Harvard University Department of Economics
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav ul a').forEach(a => a.classList.remove('active'));
+    document.getElementById('nav-' + id).classList.add('active');
+  }
+
+  function toggleAbstract(btn) {
+    const abs = btn.nextElementSibling;
+    abs.classList.toggle('show');
+    btn.textContent = abs.classList.contains('show') ? '[Hide Abstract]' : '[Abstract]';
+  }
+
+  // Handle hash navigation
+  if (window.location.hash) {
+    const section = window.location.hash.substring(1);
+    if (document.getElementById(section)) {
+      showSection(section);
+    }
+  }
+</script>
+
 </body>
 </html>
