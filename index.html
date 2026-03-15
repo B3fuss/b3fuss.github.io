@@ -8,7 +8,8 @@
     :root {
       --text: #1a1a1a;
       --text-secondary: #555;
-      --accent: #1a3a5c;
+      --accent: #003594;
+      --gold: #FFB81C;
       --bg: #fff;
       --bg-alt: #f7f8fa;
       --border: #ddd;
@@ -63,6 +64,8 @@
 
     nav ul a:hover, nav ul a.active {
       color: var(--accent);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 2px;
     }
 
     main {
@@ -131,7 +134,7 @@
     h2.section-title {
       font-size: 1.35rem;
       color: var(--accent);
-      border-bottom: 2px solid var(--accent);
+      border-bottom: 2px solid var(--gold);
       padding-bottom: 0.35rem;
       margin-bottom: 1.5rem;
     }
