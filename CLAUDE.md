@@ -3,19 +3,20 @@
 Personal academic website for Bnaya Dreyfuss, served by GitHub Pages at
 <https://b3fuss.github.io> from the `main` branch of `B3fuss/b3fuss.github.io`.
 
-## Structure
+## Layout
 
-There is no build step, no framework, and no dependencies. The site is a single
-hand-written page.
+```
+index.html                      the entire site (HTML + CSS + JS in one file)
+cv.pdf                          published CV — stable URL, built from cv-src/
+CV_Dreyfuss (oct-18-2025).pdf   superseded CV, kept only so old links resolve
+assets/headshot.jpg             About-section photo
+cv-src/                         LaTeX source for the CV (see below)
+design-demo.html                unrelated design sandbox, untracked — leave alone
+```
 
-- `index.html` — the entire site. HTML, CSS (in a `<style>` block) and JS (in a
-  `<script>` block) all live in this one file.
-- `headshot.jpg` — the About-section photo.
-- `CV_Dreyfuss (oct-18-2025).pdf` — the CV linked from the CV tab. The filename
-  carries its date; when a new CV is added, add the new dated file and update the
-  link in `index.html` rather than overwriting.
-- `design-demo.html` — an unrelated design sandbox ("Atlas"), untracked and not
-  part of the site. Leave it alone unless asked.
+`index.html` and `cv.pdf` must stay at the repo root: Pages serves the root as the
+site, and `cv.pdf` is the stable public URL. There is no build step for the site
+itself — no framework, no dependencies.
 
 ## How the page works
 
@@ -23,6 +24,33 @@ Three sections (`#about`, `#research`, `#cv`) live in the DOM at once. `showSect
 toggles the `.active` class to swap between them, and `toggleAbstract()` expands each
 paper's abstract. Navigation is client-side only — there are no other routes and no
 other HTML pages.
+
+## The CV
+
+**All CV changes are made in the LaTeX source, never by editing a PDF.** Edit the
+files in `cv-src/`, then:
+
+```bash
+./cv-src/build.sh
+```
+
+That writes `cv.pdf` at the repo root; commit and push to publish. `--check` builds
+without publishing.
+
+- **The source mirrors Overleaf exactly.** `cv-src/` is a verbatim Overleaf export.
+  To sync a new export, unzip it over `cv-src/` — there is nothing local to merge.
+- **Do not patch `academic-cv.cls` in the repo.** Current `fontawesome.sty` defines
+  `\FA`, which collides with the class's own `\newfontfamily\FA` for its bundled
+  FontAwesome.ttf. `build.sh` applies that fix to a throwaway copy on every build,
+  idempotently, so a fresh export keeps working. Patching the source in place would
+  be silently undone by the next export.
+- **Engine:** XeLaTeX via `tectonic` (`brew install tectonic`). It must be XeLaTeX —
+  the class uses `fontspec` with `Path=` to load bundled TTFs. `pdflatex` will not work.
+- `cv.tex` uses the `draft` class option, which only sets `\overfullrule` and
+  currently changes nothing in the output. Box warnings from the build are advisory.
+- **`cv.pdf` is a stable URL.** Don't rename it per-revision; anything already linking
+  to it should keep working. The dated Oct 2025 PDF stays at the root for the same
+  reason — it is not the current CV, just a preserved link target.
 
 ## Conventions
 
@@ -35,6 +63,8 @@ other HTML pages.
   abstract toggle, `.abstract`.
 - Use HTML entities for typography: `&mdash;`, `&ndash;`, `&amp;`, `&euml;`.
 - Google Analytics (`G-9ZXWB2YHGK`) is in `<head>`. Keep it when editing the head.
+- The site and the CV duplicate content (papers, affiliations). When one changes,
+  check whether the other needs the same edit.
 
 ## Line endings
 

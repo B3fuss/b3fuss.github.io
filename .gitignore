@@ -12,3 +12,18 @@
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+cv-src/cv.pdf
+
+# Source archives (extracted into cv-src/)
+*.zip
+
+# Local design sandbox, not part of the site
+design-demo.html
