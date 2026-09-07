@@ -53,7 +53,7 @@ git add -A && git commit -m "..." && git push
 
 ## Working copy location
 
-The repo currently lives inside OneDrive
-(`~/Library/CloudStorage/OneDrive-UniversityofPittsburgh/websites/`). OneDrive syncs
-`.git/` too, so avoid running git here while a sync is mid-flight on another machine,
-and never edit the same clone from two machines at once.
+The repo lives at `~/code/b3fuss.github.io`, deliberately outside OneDrive, iCloud,
+and Dropbox. It used to sit in OneDrive, which synced `.git/` itself and risked
+corrupting the object store. Do not move it back under a sync root — use GitHub as
+the sync mechanism between machines.
