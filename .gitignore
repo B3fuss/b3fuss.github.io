@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# OneDrive sync conflict copies
+*-conflict*
+*(conflicted copy)*
+
+# Editor / tooling
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/settings.local.json

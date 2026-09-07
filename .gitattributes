@@ -1,0 +1,11 @@
+# Normalize line endings to LF in the repo, regardless of the OS editing them.
+# Prevents whole-file "changes" when the repo moves between Windows and macOS.
+* text=auto eol=lf
+
+# Treat these as binary — never touch their bytes.
+*.pdf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
