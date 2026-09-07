@@ -63,8 +63,29 @@ without publishing.
   abstract toggle, `.abstract`.
 - Use HTML entities for typography: `&mdash;`, `&ndash;`, `&amp;`, `&euml;`.
 - Google Analytics (`G-9ZXWB2YHGK`) is in `<head>`. Keep it when editing the head.
-- The site and the CV duplicate content (papers, affiliations). When one changes,
-  check whether the other needs the same edit.
+
+## Keeping the site and the CV in sync
+
+`index.html` and `cv-src/` restate the same facts, so **every change to either one
+ends with a cross-check of the other** — not only when the overlap is obvious.
+Report any mismatch found, even one unrelated to the change at hand; don't silently
+fix biographical or authorship details.
+
+Compare, in both directions:
+
+- **Position, affiliation, email, dates.** The site's About paragraph and footer
+  against `cv.tex`'s `\position`/`\email` and `cv/professional.tex`.
+- **Paper list and grouping.** Every paper on one should appear on the other, in a
+  matching group (JMP / working / published).
+- **Titles, coauthor names, and coauthor order.** Order follows the actual byline,
+  never alphabetical, and diacritics match on both (e.g. Rapha&euml;l Raux).
+- **Publication status.** Journal, volume, issue, pages, year, and R&R status.
+- **Abstracts.** The CV carries only the JMP abstract; when it is reworded, the
+  site's copy needs the same rewording.
+
+```bash
+pdftotext -layout cv.pdf -   # the CV as text, for diffing against index.html
+```
 
 ## Line endings
 
